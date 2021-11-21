@@ -2,7 +2,7 @@ name: Rust Nightly
 
 on:
   push:
-    branches: [main]
+    branches: [jtest]
   pull_request:
     branches: [main]
 
