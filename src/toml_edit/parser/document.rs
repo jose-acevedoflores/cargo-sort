@@ -36,7 +36,7 @@ toml_parser!(parse_ws, parser, {
 });
 
 toml_parser!(parse_newline, parser, {
-    recognize(newline()).map(|w| parser.borrow_mut().deref_mut().on_ws(w))
+    recognize(newline()).map(|w| parser.borrow_mut().deref_mut().on_newline(w))
 });
 
 toml_parser!(keyval, parser, {
@@ -113,6 +113,8 @@ impl TomlParser {
     }
 
     fn on_ws(&mut self, w: &str) { self.document.trailing.push_str(w); }
+
+    fn on_newline(&mut self, _w: &str) { self.document.trailing.push_str("\n"); }
 
     fn on_comment(&mut self, c: &str, e: &str) {
         self.document.trailing.push_str(c);
